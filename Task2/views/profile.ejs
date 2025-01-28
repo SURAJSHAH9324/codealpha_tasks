@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Toggle dark mode
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen p-6">
+    <div class="max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+        <!-- Navigation Bar -->
+        <div class="bg-blue-600 dark:bg-blue-800 p-4 text-white flex justify-between items-center">
+            <a href="/thoughts" class="text-white hover:bg-blue-700 dark:hover:bg-blue-900 px-6 py-3 rounded-md">
+                See Others' Thoughts
+            </a>
+            <div>
+                <button onclick="toggleDarkMode()" 
+                        class="bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-200 px-4 py-2 rounded-md mr-4">
+                    Toggle Dark Mode
+                </button>
+                <a href="/logout" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-md">Logout</a>
+            </div>
+        </div>
+
+        <!-- Profile Header -->
+        <div class="p-8 flex items-center border-b border-gray-200 dark:border-gray-700">
+            <div class="flex-shrink-0">
+                <img class="w-28 h-28 rounded-full border-4 border-blue-500" 
+                     src="https://images.unsplash.com/photo-1444720895098-cbd6b640c909?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                     alt="Profile Picture">
+            </div>
+            <div class="ml-6">
+                <h1 class="text-3xl font-bold mb-2"><%= user.name %></h1>
+                <p class="text-gray-600 dark:text-gray-400 mb-2 text-lg">@<%= user.username %></p>
+                <p class="text-gray-500 dark:text-gray-300 text-lg">Age: <%= user.age %></p>
+            </div>
+        </div>
+
+        <!-- Create Post Section -->
+        <div class="p-8 border-b border-gray-200 dark:border-gray-700">
+            <form action="/post" method="post">
+                <textarea name="content" placeholder="What's on your mind?" rows="5"
+                          class="w-full p-5 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300"></textarea>
+                <button type="submit"
+                        class="mt-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-800 dark:hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-md">
+                    Create Post
+                </button>
+            </form>
+        </div>
+
+        <!-- Posts Section -->
+        <div class="p-8">
+            <h2 class="text-2xl font-semibold mb-6">Your Posts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <% user.post.reverse().forEach(function(post) { %>
+                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-300 dark:border-gray-700">
+                        <h4 class="text-blue-500 dark:text-blue-400 text-md mb-2"><%= post.email %></h4>
+                        <p class="text-lg text-gray-800 dark:text-gray-200 mb-4">
+                            <%= post.content %>
+                        </p>
+                        <small class="block text-gray-500 dark:text-gray-400 mb-2">
+                            <%= post.likes.length %> likes
+                        </small>
+                        <div class="flex justify-between items-center text-sm">
+                            <a href="/likes/<%= post._id %>"
+                               class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500 transition duration-200">
+                                <%= post.likes.indexOf(user._id) === -1 ? "Like" : "Unlike" %>
+                            </a>
+                            <a href="/edit/<%= post._id %>" class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100">
+                                Edit
+                            </a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

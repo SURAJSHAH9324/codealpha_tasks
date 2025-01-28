@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-zinc-900 text-white min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md p-8 bg-zinc-800 rounded-lg shadow-lg">
+        <form action="/login" method="post" class="space-y-6">
+            <h2 class="text-4xl font-bold font-serif text-center mb-6">Login</h2>
+
+            <!-- Email Input -->
+            <div class="space-y-2">
+                <input class="w-full bg-zinc-700 border-2 border-zinc-600 rounded-md px-5 py-3 placeholder-zinc-400 focus:outline-none focus:border-blue-500" 
+                    type="email" placeholder="Email" name="email" required>
+            </div>
+
+            <!-- Password Input -->
+            <div class="space-y-2">
+                <input class="w-full bg-zinc-700 border-2 border-zinc-600 rounded-md px-5 py-3 placeholder-zinc-400 focus:outline-none focus:border-blue-500" 
+                    type="password" placeholder="Password" name="password" required>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <input class="w-full py-3 rounded-md bg-blue-500 hover:bg-blue-600 transition-colors cursor-pointer font-semibold" 
+                    type="submit" value="Login">
+            </div>
+
+            <!-- Link to Register -->
+            <div class="text-center mt-4">
+                <p>Don't have an account? 
+                    <a href="/register" class="text-blue-400 hover:text-blue-600 font-semibold">Create one</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
